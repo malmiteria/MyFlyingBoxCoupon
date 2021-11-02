@@ -32,6 +32,12 @@ class CampaignsController < ApplicationController
         format.json { render json: @campaign.errors, status: :unprocessable_entity }
       end
     end
+
+    (1..campaign_params[:coupon_amount].to_i).each do |i|
+      coupon = Coupon.new(campaign_params.except(:name, :coupon_amount).merge(campaign_id: @campaign.id))
+      coupon.save
+      puts coupon
+    end
   end
 
   # PATCH/PUT /campaigns/1 or /campaigns/1.json
@@ -49,6 +55,10 @@ class CampaignsController < ApplicationController
 
   # DELETE /campaigns/1 or /campaigns/1.json
   def destroy
+    @campaign.coupons.each do |coupon|
+      coupon.destroy
+    end
+
     @campaign.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_url, notice: "Campaign was successfully destroyed." }
