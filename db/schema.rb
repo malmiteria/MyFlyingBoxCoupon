@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_134626) do
     t.datetime "stop"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "campaign_id", null: false
+    t.bigint "campaign_id"
     t.index ["campaign_id"], name: "index_coupons_on_campaign_id"
   end
 
