@@ -13,7 +13,9 @@
 ActiveRecord::Schema.define(version: 2021_11_03_121032) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "campaigns", force: :cascade do |t|
     t.uuid "campaign_id"
@@ -27,8 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_121032) do
     t.boolean "is_valid", default: true
   end
 
-  create_table "coupons", force: :cascade do |t|
-    t.uuid "coupon_id"
+  create_table "coupons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "amount"
     t.datetime "start"
     t.datetime "stop"
