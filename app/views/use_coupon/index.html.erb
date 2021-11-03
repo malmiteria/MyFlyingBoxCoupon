@@ -1,0 +1,5 @@
+<%= form_with url: "/use_coupon", method: :post do |form| %>
+  <%= form.label :uuid %>
+  <%= form.text_field :uuid %>
+  <%= form.submit 'Use Coupon' %>
+<% end %>
