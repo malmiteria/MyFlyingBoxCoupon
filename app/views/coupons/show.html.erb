@@ -20,5 +20,10 @@
   <%= @coupon.valid %>
 </p>
 
+<p>
+  <strong>Usage Unique:</strong>
+  <%= @coupon.usage_unique %>
+</p>
+
 <%= link_to 'Edit', edit_coupon_path(@coupon) %> |
 <%= link_to 'Back', coupons_path %>
